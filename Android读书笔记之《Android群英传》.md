@@ -140,6 +140,95 @@ tip8:ListView的滑动监听<br>
 2.自动显示和隐藏的ListView<br>
 3.聊天的ListView<br>
 4.动态改变ListView的布局<br>
+##第五章：Android Scroll分析
+5.1 滑动效果是如何产生的<br>
+	5.1.1 Android坐标系<br>
+	5.1.2 视图坐标系<br>
+	      和Android坐标系相比区别只是在于坐标的原点是在父视图的左上角，而非屏幕最左上角<br>，在触控事件中，通过getX(),getY()获取的就是视图坐标系中的坐标<br>
+	5.1.3 触控事件MotionEvent<br>
+		  获取坐标的api方法总结<br>
+		  (1)View提供的获取坐标方法<br>
+	      ①getTop();取到的是View自身的顶边到其父布局顶边的距离<br>
+	      ②getLeft();取到的是View自身的顶边到其父布局左边的距离<br>
+		  ③getRight();取到的是View自身的顶边到其父布局右边的距离<br>
+	      ④getButtom();取到的是View自身的顶边到其父布局底边的距离<br>
+		  (2)MotionEvent提供的方法<br>
+		  ①getX();获取点击事件距离控件左边的距离，即视图坐标<br>
+	      ②getY();获取点击事件距离控件顶边的距离，即视图坐标<br>
+		  ③getRawX();获取点击事件距离整个屏幕左边的距离，即绝对坐标<br>
+	      ④getRawY();获取点击事件距离整个屏幕左边的距离，即绝对坐标<br>
+5.2 实现滑动的7种方法<br>
+	如何使用系统的Api实现动态修改一个View的坐标，即实现滑动效果。<br>
+	思路：当触摸时，系统记下当前触摸点的坐标；移动时，记下移动后的触摸点坐标，取到偏移量，通过这个偏移量来修改View的坐标，不断这样重复就实现了滑动过程。<br>
+    5.2.1 layout方法<br>
+	      (1)在ACTION_DOWN事件中记录触摸点的坐标，通过event.getX()和event.getY();<br>(2)在ACTION_MOVE事件中计算偏移量；<br>
+	      (3)把偏移量传到layout方法中；<br>
+    5.2.2 offsetLeftAndRight()与offsetTopAndButtom()<br>
+          相当于系统提供的一个对左右和上下移动的API的封装，使用简单，直接传入偏移量；<br>
+	5.2.3 Layoutparams<br>
+		  Layoutparams保存了一个View的布局参数，所以可以在代码中，通过改变Layoutparams来动态的修改一个布局的位置参数，从而达到改变View位置的效果。<br>
+		  在代码中可以通过getLayoutparams()来获取一个View的Layoutparams，偏移量的获取同layout的方法，然后通过setLayoutparams改变其Layoutparams。<br>
+	5.2.4 scrollTo和scrollBy<br>
+          在一个View中，系统提供了这两个方法来改变一个View的位置，区别很简单<br>
+	      scrollTo(x,y)=>移动到一个点(x,y)<br>
+		  scrollBy(dx,dy)=>移动的增量是dx和dy<br>
+          注意如果是在ViewGroup中，调用者应该是这个ViewGroup<br>，注意要将增量设置成负值<br>
+	5.2.5 Scroller<br>
+          它与scrollTo()和scrollBy()有什么区别呢？<br>
+          场景：scrollTo()和scrollBy()的移动都是瞬间产生的，需要有平滑动画的特殊效果，所以Scroller就出来了<br>
+	      它的实现原理就是在move事件中，不断调用那两个方法，粒度较细，传的是很多个微小的增量，所以看起来就是平滑的了(类似动画的原理)<br>
+	      用法(步骤)<br>
+	      (1)初始化Scroller;<br>
+			 `mScroller = new Scroller(context);`<br>
+		  (2)重写computeScroll()方法，实现模拟滑动l;<br>
+	 <pre> 
+	@Override
+    public void computeScroll() {
+        super.computeScroll();
+        // 判断Scroller是否执行完毕
+        if (mScroller.computeScrollOffset()) {
+            ((View) getParent()).scrollTo(
+                    mScroller.getCurrX(),
+                    mScroller.getCurrY());
+            // 通过重绘来不断调用computeScroll
+            invalidate();
+        }
+    }
+     </pre>
+   系统在绘制View时会在draw()中调用该方法，实际使用的就是scrollTo(),注意invalidate()，因为computeScroll()不会自动调用，只能通过注意invalidate()=>draw()=>computeScroll()来间接调用;
+(3)startScroll开启模拟过程<br>
+<pre>
+	mScroller.startScroll(
+                    viewGroup.getScrollX(),
+                    viewGroup.getScrollY(),
+                    -viewGroup.getScrollX(),
+                    -viewGroup.getScrollY());
+</pre>
+   5.2.6 ps:用属性动画同样可以达到这种效果<br>
+   5.2.7 ViewDragHelper<br>
+         google在support包中提供的DrawerLayout和SlidingPaneLayout具有滑动效果，他们就是出自一个叫ViewDragHelper的类(功能强大，用法复杂)<br>
+         步骤：<br>
+	     (1)初始化ViewDragHelper;<br>
+			` mViewDragHelper = ViewDragHelper.create(this, callback);`<br>
+		 (2)拦截事件；<br>
+	<pre>
+	@Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return mViewDragHelper.shouldInterceptTouchEvent(ev);
+    }
+	</pre>
+	<pre>
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //将触摸事件传递给ViewDragHelper,此操作必不可少
+        mViewDragHelper.processTouchEvent(event);
+        return true;
+    }
+   </pre>
+        (3)处理computeScroll()；<br>
+		   因为ViewDragHelper内部也是通过Scroller来实现平滑移动的<br>
+        (4)处理回调callback；<br>
+           
 ##第六章：Android绘图机制与处理I技巧
 1.屏幕的尺寸信息<br>
   1.1 屏幕参数<br>
