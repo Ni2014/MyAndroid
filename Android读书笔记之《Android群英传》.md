@@ -55,11 +55,62 @@
   
  
 ##第三章：Android控件架构与自定义控件详解
-3.1控件的分类：①View控件；②ViewGroup控件  
+3.1 控件的分类：①View控件；②ViewGroup控件  
    通过ViewGroup，整个界面上的控件形成了一个树形结构，就是控件树，上层控件负责下层子空间的测量和绘制，并传递交互事件，在Activity的findViewById()方法，就是在控件树中以树的深度优先遍历来查找对应的元素。每个控件树的顶部都有一个ViewParent对象，是整棵树的核心，所有的交互管理事件都由他来统一调度和分配。那么，setContentView()做了什么事情呢<br>
-   每个Activity都有一个Window对象(Android中通常是由PhoneWindow实现)，PhoneWindow将一个DecorView设置成整个应用窗口的根View，作为窗口界面的顶层视图，DecorView包含了TitleView和ContentView
-
- 
+   每个Activity都有一个Window对象(Android中通常是由PhoneWindow实现)，PhoneWindow将一个DecorView设置成整个应用窗口的根View，作为窗口界面的顶层视图，DecorView包含了TitleView和ContentView,这个ContentView是个FrameLayout。<br>
+   在代码中，当在onCreate()中调用setContentView方法时，AMS会回调onResume()方法，此时系统才会把整个DecorView添加到PhoneWindow中，让其显示，最终完成界面绘制。<br>
+3.2 View的测量<br>
+    场景：要知道具体定点和控件大小你才能进行绘制吧，告诉系统这个View是多大，这个过程在onMeasure()中进行<br>
+    一个帮助我们测量View的类=>MeasureSpec类，有3种测量模式：<br>
+	(1)EXACTLY<br>
+	   当给空间指定具体多少dp的宽高时<br>
+	(2)AT_MOST<br>
+	   当给控件的宽高指定为wrap_content时<br>
+	(3)UNSPECIFIED<br>
+       在绘制自定义View时会用<br>
+       View类默认的onMeasure()方法只支持EXACTLY模式，所以在自定义控件没有重写onMeasure()的话就只能用EXACTLY模式了，也就是说如果想让你自定义的控件支持wrap_content属性的话你就要重写onMeasure()来指定wrap_content时的大小了<br>
+3.3 View的绘制<br>
+    测量好一个View后，重写onDraw(Canvas canvas),一般把Bitmap传到Canvas的构造方法中<br>
+    疑问：onDraw()中指定的画布是在哪里呢？<br>
+3.4 ViewGroup的测量<br>
+    ViewGroup要管理子View的显示大小，当ViewGroup的大小为wrap_content时，ViewGroup就要对子View进行遍历，取得所有子View的大小从而决定自己的大小，遍历子View时会调用子View的onMeasure()得到每一个测量结果，Layout布局过程也是会调用子View的onLayout()<br>
+3.5 ViewGroup的绘制<br>
+    通常不需要绘制，除非是指定了ViewGroup的背景颜色，否则ViewGroup的onDraw()不会被调用，但是ViewGroup会使用dispatchDraw()来绘制子View，同样是遍历所有子View，并利用子View的绘制方法完成绘制工作。<br>
+3.6 自定义View<br>
+    如果你决定要自定义View了，你需要做的几点：<br>
+	(1)重写onDraw()来绘制View的显示内容；<br>
+	(2)如果该控件还要使用wrap_content属性，必须重写onMeasure()；<br>
+	(3)另外，通过自定义attr属性可以设置新的属性配置值；<br>
+    而在View中有几个重要的回调方法：<br>
+	(1)onFinishInfalte(),从xml加载组件后回调;<br>
+	(2)onSizeChanged(),组件大小改变时回调;<br>
+	(3)onMeasure();<br>
+	(4)onLayout(),确定显示的位置;<br>
+	(5)onTouchEvent(),监听触摸事件时回调;<br>
+	通常有三种方式来实现自定义控件:<br>
+	(1)对现有控件进行扩展;<br>
+	(2)通过组合来实现新的控件;<br>
+	(3)重写View来实现全新的控件;<br>
+3.6.1 对现有控件进行扩展;<br>
+	一般是在onDraw()中对原生控件进行扩展；<br>
+3.6.2 创建复合控件<br>
+	一般要继承一个合适的ViewGroup，再给他添加一个指定功能的控件，让他具有更强的扩展性<br>
+	例子：TopBar<br>
+	(1)自定义属性<br>
+	   在res/values下创建一个attrs.xml的属性定义文件；<br>
+	(2)新建一个继承自ViewGroup(可以选RelativeLayout)的类,并且获取自定义的属性,系统用了TypedArray的数据结构来获取属性集<br>
+	` TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.TopBar);`<br>
+	(3)组合控件<br>
+	   ①定义接口；<br>
+	   ②暴露接口给调用者；<br>
+	   ③实现接口回调；<br>
+	(4)引用UI模板<br>
+	   需指定命名空间<br>
+3.6.3 重写View来实现全新的控件<br>
+3.7 自定义ViewGroup<br>
+3.8 事件拦截机制分析<br>
+3.8.1 什么是触摸事件以及对应的MotionEvent类<br>
+    ViewGroup级别最高，比View多了一个方法=>onInterceptTouchEvent(),事件传递和处理的顺序刚好相反<br> 
 ##第四章：ListView使用技巧
 4.1.1 使用ViewHolder模式提高效率，是ListView的视图缓存机制，避免每次调getView的时候都去findViewById()，方式就是在自定义的Adapter里面写个内部类ViewHolder<br>
 tip1:设置项目间分隔线和线的高度<br>
