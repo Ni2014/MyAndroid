@@ -56,11 +56,11 @@
  
 ##第三章：Android控件架构与自定义控件详解
 ###3.1 控件的分类：①View控件；②ViewGroup控件  
-   通过ViewGroup，整个界面上的控件形成了一个树形结构，就是控件树，上层控件负责下层子空间的测量和绘制，并传递交互事件，在Activity的findViewById()方法，就是在控件树中以树的深度优先遍历来查找对应的元素。每个控件树的顶部都有一个ViewParent对象，是整棵树的核心，所有的交互管理事件都由他来统一调度和分配。那么，setContentView()做了什么事情呢<br>
+   通过ViewGroup，整个界面上的控件形成了一个树形结构，就是控件树，上层控件负责下层子空间的测量和绘制，并传递交互事件，在Activity的findViewById()方法，就是在控件树中以树的深度优先遍历来查找对应的元素。每个控件树的顶部都有一个ViewParent对象，是整棵树的核心，所有的交互管理事件都由他来统一调度和分配。那么，setContentView()做了什么事情呢？<br>
    每个Activity都有一个Window对象(Android中通常是由PhoneWindow实现)，PhoneWindow将一个DecorView设置成整个应用窗口的根View，作为窗口界面的顶层视图，DecorView包含了TitleView和ContentView,这个ContentView是个FrameLayout。<br>
    在代码中，当在onCreate()中调用setContentView方法时，AMS会回调onResume()方法，此时系统才会把整个DecorView添加到PhoneWindow中，让其显示，最终完成界面绘制。<br>
 ###3.2 View的测量<br>
-    场景：要知道具体定点和控件大小你才能进行绘制吧，告诉系统这个View是多大，这个过程在onMeasure()中进行<br>
+   场景：要知道具体定点和控件大小你才能进行绘制吧，告诉系统这个View是多大，这个过程在onMeasure()中进行<br>
     一个帮助我们测量View的类=>MeasureSpec类，有3种测量模式：<br>
 	(1)EXACTLY<br>
 	   当给空间指定具体多少dp的宽高时<br>
@@ -70,14 +70,14 @@
        在绘制自定义View时会用<br>
        View类默认的onMeasure()方法只支持EXACTLY模式，所以在自定义控件没有重写onMeasure()的话就只能用EXACTLY模式了，也就是说如果想让你自定义的控件支持wrap_content属性的话你就要重写onMeasure()来指定wrap_content时的大小了<br>
 ###3.3 View的绘制<br>
-    测量好一个View后，重写onDraw(Canvas canvas),一般把Bitmap传到Canvas的构造方法中<br>
+   测量好一个View后，重写onDraw(Canvas canvas),一般把Bitmap传到Canvas的构造方法中<br>
     疑问：onDraw()中指定的画布是在哪里呢？<br>
 ###3.4 ViewGroup的测量<br>
-    ViewGroup要管理子View的显示大小，当ViewGroup的大小为wrap_content时，ViewGroup就要对子View进行遍历，取得所有子View的大小从而决定自己的大小，遍历子View时会调用子View的onMeasure()得到每一个测量结果，Layout布局过程也是会调用子View的onLayout()<br>
+   ViewGroup要管理子View的显示大小，当ViewGroup的大小为wrap_content时，ViewGroup就要对子View进行遍历，取得所有子View的大小从而决定自己的大小，遍历子View时会调用子View的onMeasure()得到每一个测量结果，Layout布局过程也是会调用子View的onLayout()<br>
 ###3.5 ViewGroup的绘制<br>
-    通常不需要绘制，除非是指定了ViewGroup的背景颜色，否则ViewGroup的onDraw()不会被调用，但是ViewGroup会使用dispatchDraw()来绘制子View，同样是遍历所有子View，并利用子View的绘制方法完成绘制工作。<br>
+   通常不需要绘制，除非是指定了ViewGroup的背景颜色，否则ViewGroup的onDraw()不会被调用，但是ViewGroup会使用dispatchDraw()来绘制子View，同样是遍历所有子View，并利用子View的绘制方法完成绘制工作。<br>
 ###3.6 自定义View<br>
-    如果你决定要自定义View了，你需要做的几点：<br>
+   如果你决定要自定义View了，你需要做的几点：<br>
 	(1)重写onDraw()来绘制View的显示内容；<br>
 	(2)如果该控件还要使用wrap_content属性，必须重写onMeasure()；<br>
 	(3)另外，通过自定义attr属性可以设置新的属性配置值；<br>
@@ -142,9 +142,9 @@ tip8:ListView的滑动监听<br>
 4.动态改变ListView的布局<br>
 ##第五章：Android Scroll分析
 ###5.1 滑动效果是如何产生的<br>
-	5.1.1 Android坐标系<br>
+5.1.1 Android坐标系<br>
 	5.1.2 视图坐标系<br>
-	      和Android坐标系相比区别只是在于坐标的原点是在父视图的左上角，而非屏幕最左上角<br>，在触控事件中，通过getX(),getY()获取的就是视图坐标系中的坐标<br>
+	     和Android坐标系相比区别只是在于坐标的原点是在父视图的左上角，而非屏幕最左上角<br>，在触控事件中，通过getX(),getY()获取的就是视图坐标系中的坐标<br>
 	5.1.3 触控事件MotionEvent<br>
 		  获取坐标的api方法总结<br>
 		  (1)View提供的获取坐标方法<br>
@@ -158,7 +158,7 @@ tip8:ListView的滑动监听<br>
 		  ③getRawX();获取点击事件距离整个屏幕左边的距离，即绝对坐标<br>
 	      ④getRawY();获取点击事件距离整个屏幕左边的距离，即绝对坐标<br>
 ###5.2 实现滑动的7种方法<br>
-	如何使用系统的Api实现动态修改一个View的坐标，即实现滑动效果。<br>
+如何使用系统的Api实现动态修改一个View的坐标，即实现滑动效果。<br>
 	思路：当触摸时，系统记下当前触摸点的坐标；移动时，记下移动后的触摸点坐标，取到偏移量，通过这个偏移量来修改View的坐标，不断这样重复就实现了滑动过程。<br>
     5.2.1 layout方法<br>
 	      (1)在ACTION_DOWN事件中记录触摸点的坐标，通过event.getX()和event.getY();<br>(2)在ACTION_MOVE事件中计算偏移量；<br>
@@ -246,7 +246,8 @@ tip8:ListView的滑动监听<br>
 ###8.View的孪生兄弟=>SurfaceView<br>
 ##第八章：Activity与Activity调用栈分析
 ####8.1.1 Activity的形态<br>
-	  (1)Active/Running<br>
+	  
+(1)Active/Running<br>
 	     此时，Activity处于Activity栈的最顶层，可见，并与用户进行交互；<br>
       (2)Paused<br>
          失去焦点，被一个非全屏的或者透明的Activity放在栈顶时，原来的这个Activity就失去了与用户交互的能力，系统内存极低时就会被回收；<br>
@@ -255,7 +256,8 @@ tip8:ListView的滑动监听<br>
       (4)Killed<br>
          被系统回收，无法控制；<br>
 ####8.1.2 生命周期状态<br>
-	  (1)Resumed<br>
+	  
+   (1)Resumed<br>
 	     就是Active/Running状态<br>
 	  (2)Paused<br>
          部分被挡住，该状态下Activity不会接收用户输入<br>
@@ -276,11 +278,12 @@ tip8:ListView的滑动监听<br>
       onSaveInstanceState(),将状态信息保存到Bundle对象中，这就是onCreate()方法中Bundle savedInstanceState的来源；<br>
       注意：onSaveInstanceState()方法并非每次Activity离开前台都会调用的，如果用户使用finish()结束了Activity就不会调用，并且Android系统已经默认实现了控件的状态缓存，简化开发者需要实现的缓存逻辑；<br>
 ###8.2 Activity任务栈简介<br>
-      TaskStack,Last In First Out<br>
-      改变：(1)Mainifest中的android:launchMode<br>
+   TaskStack,Last In First Out<br>
+      改变：(1)Mainifest中的android:launchMode
            (2)Intent的flag<br>
 ###8.3 AndroidManifest启动模式<br>
-       (1)standard；<br>
+       
+(1)standard；<br>
           默认的启动模式<br>，每次都会创建新的Activity实例<br>
 	   (2)singleTop；<br>
           如果栈顶的Activity是你要启动的Activity就不会新创建重复的；<br>
@@ -293,7 +296,8 @@ tip8:ListView的滑动监听<br>
           这种模式和浏览器工作原理类似，一个新的任务栈并且这个栈中只有这一个Activity，被其他的App共享，这种启动模式常用于需要与程序分离的界面<br>
        说明：如果是在singleTop和singleInstance两种模式中一个Activity通过startActivityForResult()，那么系统直接返回Activity.RESULT_CANCELED,因为系统在framework层做的限制，因为不同的应用间默认是不能传数据的，如果一定要传的话，就只能通过Intent来绑定数据<br>
 ###8.4 Intent Flag 启动模式<br>
-       常用的Flag<br>
+       
+常用的Flag<br>
        (1)Intent.FLAG_ACTIVITY_NEW_TASK<br>
           用一个新的栈，启动的每个Activity都会在一个新的栈中，通常的使用场景是在Service启动Activity，因为Service不在Activity的栈中<br>
        (2)FLAG_ACTIVITY_SINGLE_TOP<br>
@@ -303,7 +307,8 @@ tip8:ListView的滑动监听<br>
 	   (4)FLAG_ACTIVITY_NO_HISTORY<br>
           比如：A-B,B用这种模式启动了C，C再去启动D的话，最后的栈的情况就是A-B-D;<br>
 ###8.5 清空任务栈<br>
-       将一个Task全部清除，一般是在Manifest中的activity标签下指定属性<br>
+       
+将一个Task全部清除，一般是在Manifest中的activity标签下指定属性<br>
        (1)clearTaskOnLaunch<br>
           就是每次返回该Activity的时候都将该Activity之上的所有Activity都清除，可以让栈在每次初始化时都只有这一个Activity；<br>
        (2)finishOnTaskLaunch<br>
@@ -313,7 +318,8 @@ tip8:ListView的滑动监听<br>
 ###8.6 Activity任务栈使用<br>
 ##第九章：Android系统信息与安全机制<br>
 ###9.1 Android系统信息获取<br>
-	   获取系统的配置信息的两个渠道：
+	   
+获取系统的配置信息的两个渠道：
 		(1)android.os.Build<br>
 		(2)SystemProperty
        9.1.1 android.os.Build<br>
@@ -321,7 +327,8 @@ tip8:ListView的滑动监听<br>
 	   9.1.2 SystemProperty<br>
        9.1.3 Android系统信息实例<br>
 ###9.2 Android Apk应用信息获取之PackageManager<br>
-       获取包信息<br>
+       
+获取包信息<br>
        从Manifest说起，<activity>标签。系统用ActivityInfo类来封装；<br>
 	   最外面的额<manifest>，系统提供了PackageInfo类<br>
        Android系统提供了PackageManager负责管理所有已安装的App<br>
@@ -347,7 +354,8 @@ tip8:ListView的滑动监听<br>
        (8)resolveActivity=>返回指定intent的Activity<br>
        (9)resolveService=>返回指定intent的Service<br>
 ###9.3 Android Apk应用信息获取之ActivityManager<br>
-       PackageManager侧重的是获得应用的包信息，而ActivityManager侧重的是获得在运行的应用程序信息，类似PckageManager，而ActivityManager也封装了很多Bean对象<br>
+       
+PackageManager侧重的是获得应用的包信息，而ActivityManager侧重的是获得在运行的应用程序信息，类似PckageManager，而ActivityManager也封装了很多Bean对象<br>
        (1)ActivityManager.MemoryInfo<br>
           MemoryInfo有几个重要的字段，availMem=>系统可用内存，totalMem=>总内存，threshold=>低内存阀值，即区分是否低内存的临界值，lowMemory=>是否处于低内存<br>
        (2)Debug.MemoryInfo<br>
