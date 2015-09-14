@@ -1,10 +1,10 @@
 #《Android群英传》读书笔记
 ##第一章：Android体系与系统架构
-1.Dalvik与ART<br>
+###1.Dalvik与ART<br>
 前者是运行时编译，后者是安装时编译，在5.x中取代了前者<br>
-2.四大组件如何协同工作呢？<br>
+###2.四大组件如何协同工作呢？<br>
 简单说就是通过Intent串起来了<br>
-3.系统源代码目录和系统目录<br>
+###3.系统源代码目录和系统目录<br>
   
   3.1Android源代码结构<br>
   -Makefile<br>
@@ -55,11 +55,11 @@
   
  
 ##第三章：Android控件架构与自定义控件详解
-3.1 控件的分类：①View控件；②ViewGroup控件  
+###3.1 控件的分类：①View控件；②ViewGroup控件  
    通过ViewGroup，整个界面上的控件形成了一个树形结构，就是控件树，上层控件负责下层子空间的测量和绘制，并传递交互事件，在Activity的findViewById()方法，就是在控件树中以树的深度优先遍历来查找对应的元素。每个控件树的顶部都有一个ViewParent对象，是整棵树的核心，所有的交互管理事件都由他来统一调度和分配。那么，setContentView()做了什么事情呢<br>
    每个Activity都有一个Window对象(Android中通常是由PhoneWindow实现)，PhoneWindow将一个DecorView设置成整个应用窗口的根View，作为窗口界面的顶层视图，DecorView包含了TitleView和ContentView,这个ContentView是个FrameLayout。<br>
    在代码中，当在onCreate()中调用setContentView方法时，AMS会回调onResume()方法，此时系统才会把整个DecorView添加到PhoneWindow中，让其显示，最终完成界面绘制。<br>
-3.2 View的测量<br>
+###3.2 View的测量<br>
     场景：要知道具体定点和控件大小你才能进行绘制吧，告诉系统这个View是多大，这个过程在onMeasure()中进行<br>
     一个帮助我们测量View的类=>MeasureSpec类，有3种测量模式：<br>
 	(1)EXACTLY<br>
@@ -69,14 +69,14 @@
 	(3)UNSPECIFIED<br>
        在绘制自定义View时会用<br>
        View类默认的onMeasure()方法只支持EXACTLY模式，所以在自定义控件没有重写onMeasure()的话就只能用EXACTLY模式了，也就是说如果想让你自定义的控件支持wrap_content属性的话你就要重写onMeasure()来指定wrap_content时的大小了<br>
-3.3 View的绘制<br>
+###3.3 View的绘制<br>
     测量好一个View后，重写onDraw(Canvas canvas),一般把Bitmap传到Canvas的构造方法中<br>
     疑问：onDraw()中指定的画布是在哪里呢？<br>
-3.4 ViewGroup的测量<br>
+###3.4 ViewGroup的测量<br>
     ViewGroup要管理子View的显示大小，当ViewGroup的大小为wrap_content时，ViewGroup就要对子View进行遍历，取得所有子View的大小从而决定自己的大小，遍历子View时会调用子View的onMeasure()得到每一个测量结果，Layout布局过程也是会调用子View的onLayout()<br>
-3.5 ViewGroup的绘制<br>
+###3.5 ViewGroup的绘制<br>
     通常不需要绘制，除非是指定了ViewGroup的背景颜色，否则ViewGroup的onDraw()不会被调用，但是ViewGroup会使用dispatchDraw()来绘制子View，同样是遍历所有子View，并利用子View的绘制方法完成绘制工作。<br>
-3.6 自定义View<br>
+###3.6 自定义View<br>
     如果你决定要自定义View了，你需要做的几点：<br>
 	(1)重写onDraw()来绘制View的显示内容；<br>
 	(2)如果该控件还要使用wrap_content属性，必须重写onMeasure()；<br>
@@ -107,12 +107,12 @@
 	(4)引用UI模板<br>
 	   需指定命名空间<br>
 3.6.3 重写View来实现全新的控件<br>
-3.7 自定义ViewGroup<br>
-3.8 事件拦截机制分析<br>
+###3.7 自定义ViewGroup<br>
+###3.8 事件拦截机制分析<br>
 3.8.1 什么是触摸事件以及对应的MotionEvent类<br>
     ViewGroup级别最高，比View多了一个方法=>onInterceptTouchEvent(),事件传递和处理的顺序刚好相反<br> 
 ##第四章：ListView使用技巧
-4.1.1 使用ViewHolder模式提高效率，是ListView的视图缓存机制，避免每次调getView的时候都去findViewById()，方式就是在自定义的Adapter里面写个内部类ViewHolder<br>
+###4.1.1 使用ViewHolder模式提高效率，是ListView的视图缓存机制，避免每次调getView的时候都去findViewById()，方式就是在自定义的Adapter里面写个内部类ViewHolder<br>
 tip1:设置项目间分隔线和线的高度<br>
 android:divider(如果透明就是@null)<br>
 android:dividerHeight<br>
@@ -141,7 +141,7 @@ tip8:ListView的滑动监听<br>
 3.聊天的ListView<br>
 4.动态改变ListView的布局<br>
 ##第五章：Android Scroll分析
-5.1 滑动效果是如何产生的<br>
+###5.1 滑动效果是如何产生的<br>
 	5.1.1 Android坐标系<br>
 	5.1.2 视图坐标系<br>
 	      和Android坐标系相比区别只是在于坐标的原点是在父视图的左上角，而非屏幕最左上角<br>，在触控事件中，通过getX(),getY()获取的就是视图坐标系中的坐标<br>
@@ -157,7 +157,7 @@ tip8:ListView的滑动监听<br>
 	      ②getY();获取点击事件距离控件顶边的距离，即视图坐标<br>
 		  ③getRawX();获取点击事件距离整个屏幕左边的距离，即绝对坐标<br>
 	      ④getRawY();获取点击事件距离整个屏幕左边的距离，即绝对坐标<br>
-5.2 实现滑动的7种方法<br>
+###5.2 实现滑动的7种方法<br>
 	如何使用系统的Api实现动态修改一个View的坐标，即实现滑动效果。<br>
 	思路：当触摸时，系统记下当前触摸点的坐标；移动时，记下移动后的触摸点坐标，取到偏移量，通过这个偏移量来修改View的坐标，不断这样重复就实现了滑动过程。<br>
     5.2.1 layout方法<br>
@@ -230,22 +230,89 @@ tip8:ListView的滑动监听<br>
         (4)处理回调callback；<br>
            
 ##第六章：Android绘图机制与处理I技巧
-1.屏幕的尺寸信息<br>
+###1.屏幕的尺寸信息<br>
   1.1 屏幕参数<br>
       大小，分辨率，PPI<br>
   1.2 系统屏幕密度<br>
 	  ldpi，mdpi,hdpi,xhdpi,xxhdpi<br> 
   1.3 独立像素密度<br>
 
-2.2D绘图基础<br>
-3.xml绘图<br>
-4.绘图技巧<br>
-5.色彩特效处理<br>
-6.图形特效处理<br>
-7.画笔特效处理<br>
-8.View的孪生兄弟=>SurfaceView
+###2.2D绘图基础<br>
+###3.xml绘图<br>
+###4.绘图技巧<br>
+###5.色彩特效处理<br>
+###6.图形特效处理<br>
+###7.画笔特效处理<br>
+###8.View的孪生兄弟=>SurfaceView<br>
+##第八章：Activity与Activity调用栈分析
+####8.1.1 Activity的形态<br>
+	  (1)Active/Running<br>
+	     此时，Activity处于Activity栈的最顶层，可见，并与用户进行交互；<br>
+      (2)Paused<br>
+         失去焦点，被一个非全屏的或者透明的Activity放在栈顶时，原来的这个Activity就失去了与用户交互的能力，系统内存极低时就会被回收；<br>
+      (3)Stopped<br>
+         被完全覆盖，不再可见，却依旧保持了所有的状态信息和成员变量；<br>
+      (4)Killed<br>
+         被系统回收，无法控制；<br>
+####8.1.2 生命周期状态<br>
+	  (1)Resumed<br>
+	     就是Active/Running状态<br>
+	  (2)Paused<br>
+         部分被挡住，该状态下Activity不会接收用户输入<br>
+      (3)Stopped<br>
+         被完全覆盖，不可见，仅仅在后台运行<br>
+8.1.2.1 Activity启动和销毁的过程<br>
+      系统调用onCreate()后，会马上调用onStart(),接着调用onResume()进入Resume状态，最后就停在了Resume状态，完成启动。系统会调用onDestory()来结束一个Activity的生命周期让他回到Killed形态。<br>
+      onCreate()=>创建基本的UI元素<br>
+      onPause()与onStop()=>清楚Activity的资源，避免浪费<br>
+      onDestory()中，因为引用在Activity销毁时销毁，但是线程不会，所以清除开启的线程。<br>
+8.1.2.2 Activity暂停与恢复过程<br>
+      当栈顶的Activity部分不可见后会导致这个Activity进入Pause形态，会调用onPause()，当线程结束后就调用onResume()来恢复到Resume状态<br>
+      onPaused()=>释放系统资源，如Camera，sensor、receivers<br>
+      onResume()=>需要重新初始化在onPause()中释放的资源<br>
+8.1.2.3 Activity的停止过程<br>
+      当Activity部分不可见时有两种可能，(1)从部分不可见到可见，就是恢复过程；(2)从部分不可见到完全不可见，就是停止过程，但都会掉onPause()<br>
+8.1.2.4 Activity的重新创建过程<br>
+      onSaveInstanceState(),将状态信息保存到Bundle对象中，这就是onCreate()方法中Bundle savedInstanceState的来源；<br>
+      注意：onSaveInstanceState()方法并非每次Activity离开前台都会调用的，如果用户使用finish()结束了Activity就不会调用，并且Android系统已经默认实现了控件的状态缓存，简化开发者需要实现的缓存逻辑；<br>
+###8.2 Activity任务栈简介<br>
+      TaskStack,Last In First Out<br>
+      改变：(1)Mainifest中的android:launchMode<br>
+           (2)Intent的flag<br>
+###8.3 AndroidManifest启动模式<br>
+       (1)standard；<br>
+          默认的启动模式<br>，每次都会创建新的Activity实例<br>
+	   (2)singleTop；<br>
+          如果栈顶的Activity是你要启动的Activity就不会新创建重复的；<br>
+	   (3)singleTask；<br>
+          和singleTop的区别，singleTop是查看栈顶元素是否是需要启动的Activity，而singleTask是查整个Activity栈是否存在当前需要启动的Activity；<br>
+    	  如果是在同一个App中跳转，如果栈中已经存在需要启动的Activity，那么就将这个Activity放到栈顶并将该Activity之上的Activity全部销毁；如果是其他的Activity来启动的话呢就会新建一个新的任务栈；<br>
+          注意：如果现在是A-B,B要启动E(E用了这种模式)，在E所在的栈中的情况是F-E，那么E所在的栈到了前台后，单击返回是会到F的，过程就是A-B=>(B启动了E,记住中间隔了个F)A-B-F-E(back)=>A-B-F(back)=>A-B<br>
+          用法：这种启动模式创建的Activity不是在新的任务栈中被打开就是将已打开的Activity切换到前台，所以可以用在推出整个应用的场景，将主Activity设置为这种模式，在要退出的Activity转到主Activity，然后主Activity之上的都会被清除，再重写主Activity的onNewIntent(),在方法中加上finish(),将最后一个Activity结束掉；<br>
+	   (4)singleInstance；<br>
+          这种模式和浏览器工作原理类似，一个新的任务栈并且这个栈中只有这一个Activity，被其他的App共享，这种启动模式常用于需要与程序分离的界面<br>
+       说明：如果是在singleTop和singleInstance两种模式中一个Activity通过startActivityForResult()，那么系统直接返回Activity.RESULT_CANCELED,因为系统在framework层做的限制，因为不同的应用间默认是不能传数据的，如果一定要传的话，就只能通过Intent来绑定数据<br>
+###8.4 Intent Flag 启动模式<br>
+       常用的Flag<br>
+       (1)Intent.FLAG_ACTIVITY_NEW_TASK<br>
+          用一个新的栈，启动的每个Activity都会在一个新的栈中，通常的使用场景是在Service启动Activity，因为Service不在Activity的栈中<br>
+       (2)FLAG_ACTIVITY_SINGLE_TOP<br>
+          singleTop<br>
+	   (3)FLAG_ACTIVITY_CLEAR_TOP<br>
+          singleTask<br>
+	   (4)FLAG_ACTIVITY_NO_HISTORY<br>
+          比如：A-B,B用这种模式启动了C，C再去启动D的话，最后的栈的情况就是A-B-D;<br>
+###8.5 清空任务栈<br>
+       将一个Task全部清除，一般是在Manifest中的activity标签下指定属性<br>
+       (1)clearTaskOnLaunch<br>
+          就是每次返回该Activity的时候都将该Activity之上的所有Activity都清除，可以让栈在每次初始化时都只有这一个Activity；<br>
+       (2)finishOnTaskLaunch<br>
+          与clearTaskOnLaunch类似，只是clearTaskOnLaunch作用在别人身上，而finishOnTaskLaunch是作用在自己身上，通过这个属性，当离开这个Activity所在的栈，用户在返回时，该Activity就会被finish掉；<br>
+       (3)alwaysRetainTaskState<br>
+          给Task的“一道免死金牌”，指定了该属性的Activity所在的栈将不再接受任何清理命令，一直保持当前Task状态；<br>
+###8.6 Activity任务栈使用<br>
 ##第十章：Android性能优化
-1.布局优化<br>
+###1.布局优化<br>
 1.1 Android UI渲染机制<br>
     Android中，系统通过VSYNC信号触发对UI的渲染和重绘,间隔时间是16ms(1秒显示60帧=>1000ms/60),也就是说当你不能再16ms内完成绘制，就丢帧卡顿了<br>
     Android中提供的检测UI渲染时间的工具，Profile GPU Rendering，选中On Screen as bars<br>
@@ -261,7 +328,7 @@ tip8:ListView的滑动监听<br>
        tip：和设置view的GONE的区别：<ViewStub>是只有在显示时才会去渲染布局，而View.GONE在初始化布局就加到了布局树下了，所以<ViewStub>更加高效<br>
 	(3)<merge>标签<br>
 1.5 Hierarchy View<br>
-2.内存优化<br>
+###2.内存优化<br>
 2.1 什么是内存<br>
 	因为Android应用的沙箱机制，每个App分到的内存是有限的，太低就会触发LMK(Low Memory Kill)机制，内存通常是指的RAM，包括有：<br>(1)寄存器；在cpu内部，程序无法控制<br>(2)栈；放基本类型的数据和对象的引用<br>(3)堆；放new出来的对象和数组，由GC回收器管理<br>(4)静态存储区域；<br>(5)常量池；包括直接常量和符号引用<br>
     所谓内存分析，就是分析Heap中的内存状态<br>
@@ -285,11 +352,11 @@ tip8:ListView的滑动监听<br>
 	(8)使用RenderScript和OpenGL进行复杂的绘图操作<br>
 	(9)用SurfaceView代替View来进行大量和频繁的绘图操作<br>
 	(10)尽量使用视图缓存，而不是每次都执行inflate()解析视图<br>
-3.Lint工具<br>
-4.用AS中的Memory Monitor工具<br>
-5.用TraceView工具优化App的性能<br>
-6.用MAT工具分析App内存状态<br>
-7.用Dumpsys命令分析系统状态<br>
+###3.Lint工具<br>
+###4.用AS中的Memory Monitor工具<br>
+###5.用TraceView工具优化App的性能<br>
+###6.用MAT工具分析App内存状态<br>
+###7.用Dumpsys命令分析系统状态<br>
 
 
 ##第十一章：搭建云端服务器
