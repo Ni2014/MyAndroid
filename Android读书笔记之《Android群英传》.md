@@ -271,7 +271,7 @@ tip8:ListView的滑动监听<br>
       onPaused()=>释放系统资源，如Camera，sensor、receivers<br>
       onResume()=>需要重新初始化在onPause()中释放的资源<br>
 8.1.2.3 Activity的停止过程<br>
-      当Activity部分不可见时有两种可能，(1)从部分不可见到可见，就是恢复过程；(2)从部分不可见到完全不可见，就是停止过程，但都会掉onPause()<br>
+      当Activity部分不可见时有两种可能，(1)从部分不可见到可见，就是恢复过程；(2)从部分不可见到完全不可见，就是停止过程，但都会调onPause()<br>
 8.1.2.4 Activity的重新创建过程<br>
       onSaveInstanceState(),将状态信息保存到Bundle对象中，这就是onCreate()方法中Bundle savedInstanceState的来源；<br>
       注意：onSaveInstanceState()方法并非每次Activity离开前台都会调用的，如果用户使用finish()结束了Activity就不会调用，并且Android系统已经默认实现了控件的状态缓存，简化开发者需要实现的缓存逻辑；<br>
@@ -311,6 +311,76 @@ tip8:ListView的滑动监听<br>
        (3)alwaysRetainTaskState<br>
           给Task的“一道免死金牌”，指定了该属性的Activity所在的栈将不再接受任何清理命令，一直保持当前Task状态；<br>
 ###8.6 Activity任务栈使用<br>
+##第九章：Android系统信息与安全机制<br>
+###9.1 Android系统信息获取<br>
+	   获取系统的配置信息的两个渠道：
+		(1)android.os.Build<br>
+		(2)SystemProperty
+       9.1.1 android.os.Build<br>
+             包含了系统编译时的大量设备，配置信息<br>
+	   9.1.2 SystemProperty<br>
+       9.1.3 Android系统信息实例<br>
+###9.2 Android Apk应用信息获取之PackageManager<br>
+       获取包信息<br>
+       从Manifest说起，<activity>标签。系统用ActivityInfo类来封装；<br>
+	   最外面的额<manifest>，系统提供了PackageInfo类<br>
+       Android系统提供了PackageManager负责管理所有已安装的App<br>
+       这些封装的信息就类似Bean对象<br>
+       (1)ActivityInfo<br>
+       封装了在Manifest里面<activity></activity>和<receiver></receiver>中间的所有信息，包括name,icon,label,launchmode等<br>
+       (2)ServiceInfo<br>
+       和ActivityInfo类似，封装了<service></service>间的所有信息<br>
+	   ApplicationInfo<br>
+	   封装了<application></application>间的所有信息,特殊的是ApplicationInfo包含了很多Flag，FLAG_SYSTEM表示为系统应用，FLAG_EXTERNAL_STORAGE表示为安装在SDCard上的应用等，由这些Flag可以方便地判断应用的类型<br>
+	   (3)PackageInfo<br>
+	   包含了所有的Activity和Service信息<br>
+       (4)ResolveInfo<br>
+       比较特殊，封装的是包含<intent>信息的上一级信息，所以它可以返回ActivityInfo，ServiceInfo等包含<intent>的信息，常用来帮助我们找到那些包含特定Intent条件的信息，如带分享功能，播放功能等应用<br>
+       有了上面这些Bean对象后，PackageManager就可以通过各种方法返回不同类型的Bean对象了。常用的方法有：<br>
+       (1)getPackageManager=>返回一个PackageManager对象<br>
+       (2)getActivityInfo=>以ActivityInfo的形式返回指定包名的ActivityInfo<br>
+       (3)getApplicationIcon=>返回指定包名的icon<br>
+       (4)getInstalledApplications=>以ActivityInfo的形式返回安装的应用<br>
+       (5)getInstalledPackages=>以PackageInfo的形式返回安装的应用<br>
+       (6)queryIntentActivities=>返回指定intent的ResolveInfo对象，Activity集合<br>
+       (7)queryIntentService=>返回指定intent的ResolveInfo对象，Service集合<br>
+       (8)resolveActivity=>返回指定intent的Activity<br>
+       (9)resolveService=>返回指定intent的Service<br>
+###9.3 Android Apk应用信息获取之ActivityManager<br>
+       PackageManager侧重的是获得应用的包信息，而ActivityManager侧重的是获得在运行的应用程序信息，类似PckageManager，而ActivityManager也封装了很多Bean对象<br>
+       (1)ActivityManager.MemoryInfo<br>
+          MemoryInfo有几个重要的字段，availMem=>系统可用内存，totalMem=>总内存，threshold=>低内存阀值，即区分是否低内存的临界值，lowMemory=>是否处于低内存<br>
+       (2)Debug.MemoryInfo<br>
+          Android中的另一个MemoryInfo，前面的通常用于获取全局的内存使用信息，而这个MemoryInfo用于统计进程下的内存信息<br>
+       (3)RunningAppProcessInfo<br>
+          运行进程的信息，存储的字段有：processName=>进程名，pid，uid，pkgList=>该进程下的所有包<br>
+       (4)RunningServiceInfo<br>
+          类似RunningAppProcessInfo，封装运行的服务信息，activeSince=>第一次被激活的时间，方式，foreground=>服务是否在后台执行<br>
+###9.4 解析Packages.xml获取系统信息<br>
+###9.5 Android安全机制<br>
+   9.5.1 简介<br>
+         (1)第一道防线；<br>
+            代码安全机制--代码混淆proguard
+         (2)第二道防线；<br>
+            应用接入权限控制--AndroidManifest文件权限声明，权限检查机制<br>
+         (3)第三道防线；<br>
+            应用前面机制--数字证书
+         (4)第四道防线；<br>
+            Linux内核层安全机制--Uid，访问权限控制
+         (5)第五道防线；<br>
+            Android虚拟机沙箱机制--沙箱隔离
+   9.5.2 隐患<br>
+         (1)代码漏洞；<br>
+         (2)Root风险；<br>
+         (3)安全机制不健全；<br>
+         (4)用户安全意识；<br>
+         (5)Android开发原则和安全；<br>
+   9.5.3 Apk反编译<br>
+         三个工具:apktool,Dex2jar,jd-gui<br>
+   9.5.4 Apk加密<br>  
+         通常用ProGuard对Apk进行混淆处理<br>
+  
+
 ##第十章：Android性能优化
 ###1.布局优化<br>
 1.1 Android UI渲染机制<br>
