@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">EX06_MaterialDrawerTemplete</string>
-    <string name="drawer_open">Menu opened</string>
-    <string name="drawer_close">Menu closed</string>
-    <string name="action_settings">Settings</string>
-</resources>

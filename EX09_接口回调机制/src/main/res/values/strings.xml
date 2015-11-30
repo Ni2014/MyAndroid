@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">EX09_接口回调机制</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-</resources>
