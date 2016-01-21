@@ -1,0 +1,208 @@
+Android中的小坑
+
+    原则：对Android的理解足够深了才能把应用做好
+          源码之前 了无秘密(侯捷) =>　至少是在SDK中的代码
+          换个角度(SDK开发者)看Android
+
+    Android系统的Main方法在哪？
+        为什么不向java项目那样有个main入口方法？
+        App是怎么启动起来的?
+        为什么我只需要自己写继承Activity类然后重写生命周期方法就行了？后面都是神秘的Framework层帮我们做的吗？
+        (反省自己对Android的片面认知 运行起来的应用 = Framework(好神秘) + APP(你做的))
+
+    Handler机制相关的?
+        为什么需要用多线程？
+        Handler的作用？
+        Handler的基本用法
+        Message的参数生活化理解，
+        另一种更新UI的思路，传入的一般是Runnable
+            runOnUiThread()
+            view.post()
+            view.postDelay()
+            handler.post()
+            handler.postDelay()
+            看源码发现类似
+            问：Handler的post用法为什么传的是Runnable 难道是线程(看你基础扎实不) 这里的Runnable是什么作用？
+        Handler以及Message Looper MessageQueue类的理解？
+        消息队列模型的理解
+        自定义消息队列你怎么做？怎么发现我new不了Looper和MessageQueue
+        好麻烦的步骤 能自己封装下吗 其实系统已经帮你想到了 就是你之前一直困惑的HandlerThread
+        能继续封装吗 系统做到了吗 就是你惊讶的IntentService(和Service的尴尬关系)
+        如果从HandlerThread到IntentService的封装过程 你会吗
+        理解IntentService的设计的用心 为什么是继承Service 为什么传的是Intent 不是Message吗
+            => 如果Intent传值 key是可以自定义的啊 系统怎么知道和处理得到Vaule呢
+            子线程真的不能更新UI吗？
+                系统中是怎么检查更新UI的线程是不是UI线程呢？
+                ViewRootImp对象创建的时机？
+            从Runnable IntentService继承自Service Intent代替Message 你发现了什么 => SDK开发者的复用思路
+                复用对App性能和开发者(主要)的好处
+
+        还有 如果在子线程更新了ProgressBar 竟然可以 问什么
+            =>　看源码　有对线程做检查
+
+        还有　你对AsyncTask的理解有多少 看起来好像没有开线程哦(那你就错了)
+            和Handler相比 不仅仅是AsyncTask封装了Handler +　Thread那么简单哦
+            资源池的引入 => 打扫房间复用的那把扫把
+            线程也是开销很大的对象 => 线程的资源池 => 线程池 AsyncTask已经做了
+            联想下Message的获取 一般不推荐用new Handler.obtainMessage()
+       那么 什么时候用AsyncTask 什么时候用HandlerThread呢
+       还有 AsyncTask中涉及到的Executor是什么，callbale接口等等
+
+
+
+    有了线程间通信 那么进程间通信呢
+    IPC 为什么需要IPC 内存 =>　数据　
+
+    自定义控件
+        先要熟悉系统空间控件
+        UI分类
+            简单控件
+                TextView　Button等
+                特征：内容和控件一般都是属于一个对象
+                题外话：Button怎么是TextView的子类呢？ 按钮就是可以被点击的文本嘛
+            复合控件
+                ListView GridView等称之AdapterView
+                特征：内容和控件一般来自不同的对象 比如内容一般来自于适配器
+            通知系统
+                Toast Dialog Notification
+                单独提出来的原因：Toast和Dialog是悬浮在Activity上的
+                Notification就在Activity之外，布局对应的View也是有区别的(=> RemoteView)
+          AppWidget
+                桌面小组件 天气 闹钟等
+          布局
+      为什么要自定义控件
+      自定义之前先看个现象：
+            为什么CheckBox和RadioButton在布局文件中除了标签不一样 属性都一样 看起来的外观就不一样 这是什么决定的呢 系统怎么决定的？
+            另外：控件就一定要写在manifest文件中吗 本质都是对象 都是可以new的 试试(思考系统是怎么读取的 setContentView后面帮你做了什么事情，还有，
+            findViewById能真正找到一个非空控件的前提条件是？)
+            对了 一般设置Activity没有标题要在setContentView之前 为什么 改了顺序发现崩溃了 为什么
+            查找系统资源 res下的styles.xml和themes.xml
+            需求：做版本兼容 在低版本实现4.x的HOLO风格 在SDK的drawable目录下你发现了什么
+                对不同控件做兼容 怎么熟练在styles.xml和themes.xml以及sdk的drawable目录下来回找
+                找到的是什么 => 不是selector就是png
+              横向：
+              对简单的控件怎么兼容？TextView等
+              对进度条类似的控件呢？ ProgressBar SeekBar
+              对通知系统的控件怎么兼容？
+                  Toast
+                      只是调用了makeText方法 就创建了文字 难道new了TextView？ => 看源码
+                      发现文字属性new不了？ => 如果是你一般都提供get和set方法的
+                  Dialog
+                      系统的AlertDialog是不用的很爽？
+                      为什么？ 创建的方式很奇怪 AlertDialog.Builder.setTitle().setIcon().setPositive(new xxxListener()).show();
+                      创建的是Builder对象吧 =>　Builder模式
+                      为什么用建造者模式？
+                          不用的话 你之前是怎么传参数？ =>　构造函数传参 new AlertDialog.Builder("","","","","","","","")
+                          那么多的参数 都是字符串 你会晕吗 如果顺序错了那对话框就搞笑了 这也不是语法错误啊
+                          =>　改成建造者模式 参数和对应的方法setXXX一一对应 是不是很方便 而且顺序没规定 你想到了就写
+                            => SDK的开发者考虑到了你把顺序写错 而且编译也是通过的情况
+                  Notification
+                      基本用法
+                      点击要跳转啊 => PendingIntent “即将发生的Intent”
+                      自定义？ 在通知栏显示的布局要自定义
+                          系统默认的布局形态
+                            标题 + 文本 +　图标　+ 时间
+                          场景：下载时候的进度条
+                          测试OK 既然进度条可以 那么SeekBar呢 =>　报错了
+                                => 为什么 看源码 (提示：系统一般称在通知栏布局中的View为RemoteView "远程的View"和Activity中的View啥区别)
+                                    => 发现：ProgressBar类中有注解@RemoteView,但是SeekBar没有 => 检验 看下TextView类有没有
+                                      => 也说明了@RemoteView注解是没有继承性的
+                                          => 那么 这种方式(@RemoteView注解)是不是也决定了桌面小组AppWidget呢？
+                      怎么操纵那些View呢
+                  选项菜单
+                      模拟行为后做
+                      借助PopupWindow
+
+              纵向：
+              简单的自定义控件用的时候还要new 那么怎么才能像用系统控件那样爽呢 =>　自定义属性
+              命名空间
+
+              还有
+                  不同控件在不同版本的不同实现
+                    比如ProgressBar在2.3和4.0的不同实现
+                        2.3是用xml的shape画三个层
+                        4.0是图片
+
+    对框架和开源项目的思考
+      一 思考与认识
+          你是怎么认识框架的？
+          那么多的开源项目 都是框架吗(图样)、
+          用开源项目经常遇到的问题
+          开源项目是什么 对了SDK呢 开放接口呢 ShareSDK Bmob sinaSDK Umeng？？他们之间是什么关系？
+          对了 库呢？
+          框架和库的区别是什么
+              => 使用类上，是否控制流程，调用顺序上
+          控制都在框架了，控制着流程和生命周期等
+      二 实现(造轮)所需要的技术
+
+          基础：面向对象设计原则和设计模式
+          用设计模式的前提：项目规模要大 比如Android系统 就用到了很多的设计模式
+          先理解好IOC
+              依赖
+              怎么实现控制反转 => 依赖注入
+              参照对象：Spring等
+              例子：
+              回想下：为什么你每次写四大组件都要在manifest中注册
+                      注册类名写错时报的错 ClassNotFoundError
+                      标签写错时报的错    ClassCastError
+          和Android有关的设计模式
+              1. 模板方法模式
+                Activity的生命周期方法
+                延伸：父类用接口还是抽象类还是一般类修饰，方法前的public和protect有什么用意
+                      对照的例子：Runnable，AsyncTask
+                      因素：类是否多变 => 升级后是否对低版本是兼容的
+              2. 观察者模式
+                UI事件
+                从接口回调到观察者模式
+                例子：
+              3. 单例模式
+                各种
+                延伸：各种单例模式的写法
+              4. 责任链模式
+                Android中的事件机制
+              5. 建造者模式
+                AlertDialog.Builder
+              6. 代理模式
+                binder
+              ...
+          反射
+
+          IOC XUtils AFinal等
+          依赖注入
+          注解 => 自定义注解
+
+          AndroidAnnotation => 和一般的依赖注入库有什么区别 => 编译时生成代码 => AAPT技术
+          (把工作在编译时就先做了，运行时就不用再反射那么麻烦了)
+
+          事件驱动编程
+              EventBus
+              Otto
+
+          数据库ORM
+              ActiveAndroid
+
+          网络
+              Volley
+              在其基础上封装
+
+          json数据解析
+              Gson
+              在其基础上封装
+
+
+          MVC模式相关
+          MVC => MVP => MVVM
+          演变的原因是什么
+          对了 AOP在Android中的应用是什么 切面是在哪里？
+
+      三 SDK好像很高端 门槛高吗
+        其实就是库项目 (库项目的好处 => 复用)
+        做个简单的库项目
+        例子
+
+        做的好的门槛就很高 你的用户是一般开发者，怎么才能让他们很方便 降低他们的学习成本 易用 易维护
+        => 尽量暴露给开发者熟悉的Api 尽量少创建对象(用工具类)
+
+
+     四 插件技术
+        插件化开发 增量更新
