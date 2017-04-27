@@ -1,0 +1,1 @@
+1 提取出一个类似中间基类MiddleClass 是为 抽象的Decorator

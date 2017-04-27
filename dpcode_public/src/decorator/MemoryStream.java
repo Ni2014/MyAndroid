@@ -1,0 +1,21 @@
+package decorator;
+
+/**流的扩展
+ * Created by Administrator on 2017/4/26.
+ */
+public class MemoryStream extends Stream {
+    @Override
+    public void read() {
+
+    }
+
+    @Override
+    public void seek() {
+
+    }
+
+    @Override
+    public void write() {
+
+    }
+}
