@@ -1,0 +1,691 @@
+// 0129 
+
+
+B
+RingBall -- gajgame.tdata.sup -- SuperRST_0111 -- RingBall_0111
+// 游戏内名字 Ring Ball
+icon  AAJOGORI
+// adjust
+token    g9le1dzdwu0w
+events
+FB_LOGIN     p99lt4
+FB_REGISTER    bbrnf8
+FIRST_RECHARGE    yvfu8k
+GOOGLE_LOGIN    atl3mb
+GOOGLE_REGISTER  o64wjg
+LOGIN    yt7eoa
+PAGE_VIEW  x6d8be
+PAY_RECHARGE bdm5bd
+REGISTER    v8b3sa
+SECOND_RECHARGE   f0c5av
+
+
+https://aajogo.com?referralcode=63970757ab797cdc4b4d746e&fromApk
+
+测试ok
+简介
+好玩的圆球游戏
+Funny ball game
+详情
+这是一个轻松的游戏，当上面的圆球在转动时，你需要找到合适的时机把下面的珠子点击后接上去，注意这些轴之间不能碰到哦，不能就失败了，如果全部接上去，界面会变绿，就代表您成功了，加油哦！
+
+This is an easy game. When the ball on the top is rotating, you need to find the right time to click and connect the beads on the bottom. Pay attention to the fact that these axes can't touch each other. If you connect them all, the interface will turn green, which means you have succeeded. Come on!
+
+C
+戳泡泡 --  casualfactory.game.bubble -- CPPAO_0111
+简介
+看你戳了多少泡泡
+See how many bubbles you poke
+详情
+看这里，这是一个很容易上手的休闲游戏，点击这些泡泡们就能得分了，是不是很简单，那就开始玩吧！！！
+Look here, this is a very easy to use leisure game. Click these bubbles to score. Is it very simple? Let's start playing!!!
+
+名字 AAJOGORS
+
+adjust
+token 41pxjvrc6cqo
+events
+FB_LOGIN     8e9jwk
+FB_REGISTER    hqp7z1
+FIRST_RECHARGE    arvlqu
+GOOGLE_LOGIN    it1ba0
+GOOGLE_REGISTER  9dpvzm
+LOGIN    x6xaio
+PAGE_VIEW  b2udft
+PAY_RECHARGE f8yq9c
+REGISTER    bj0pbd
+SECOND_RECHARGE   ddb71k
+// 测试ok
+
+
+D
+打地鼠风格游戏(蟹) -- dds.fungoood.game -- DDS_0111
+简介 看看螃蟹在哪里
+Look where the crab is
+详情
+这是一个免费，好玩的休闲小游戏。在有限的时间内，螃蟹会从不同的格子出现，你需要快速反应并点击它就能得分了，听说坚持到最后的人不多哦，我相信你一定可以的！
+This is a free and fun leisure game. In a limited time, crabs will appear from different grids. You need to react quickly and click it to score. It is said that there are not many people who persist to the end. I believe you can!
+
+名字AAJOGORG
+adjust
+token at7eaqohh8u8
+events
+FB_LOGIN     mazzvk
+FB_REGISTER    c6vb5u
+FIRST_RECHARGE    fujjd7
+GOOGLE_LOGIN    bzp2r7
+GOOGLE_REGISTER  ysbvmd
+LOGIN    iipukn
+PAGE_VIEW  uvy5nc
+PAY_RECHARGE t6sdju
+REGISTER    y3uxvz
+SECOND_RECHARGE   e1xlee
+// 测试 ok
+// 已提
+
+新批gp号 ？
+E
+打破皮纳塔 -- gamepub.playstyle.pinata.go -- DPPTN_0111
+//
+名字 AAJOGORF
+
+
+// adjust
+token invwynmgmznk
+events
+FB_LOGIN     e5opse
+FB_REGISTER    3muroj
+FIRST_RECHARGE    tqvob8
+GOOGLE_LOGIN    uxno8l
+GOOGLE_REGISTER  14ihy5
+LOGIN    qtssjz
+PAGE_VIEW  r5ct6p
+PAY_RECHARGE xh15xp
+REGISTER    rpma7b
+SECOND_RECHARGE   2run3t
+// 测试ok
+
+简介 一款越玩越觉得好玩的游戏
+A game that is more fun to play
+详情
+在这款游戏里我们不需要做什么复杂的事情，单单点击就好了。悬在空中的形状各自不同的貌似玩偶的东西其实是装有糖果的盒子，当我们点击鼠标到一定次数它就会被打开，这时候下面的小宝贝就吃到他想要的糖果啦。
+In this game, we don't need to do anything complicated, just click. The doll-like things hanging in the air with different shapes are actually boxes containing candy. When we click the mouse for a certain number of times, it will be opened, and then the baby below will eat the candy he wants.
+
+
+
+
+F
+大长腿摔倒 -- ajgame.leg.funny -- DCT_0111
+// 游戏内标题 ok
+简介 看你的腿能走多远
+See how far your legs can go
+详情 用你的手指控制游戏中的大长腿走路，尽量别让它摔倒了，加油，看看你走得最远的距离是多远！
+Use your fingers to control the long leg walking in the game. Try not to let it fall. Come on, and see how far you can go!
+
+
+名字 AAJOGORD
+
+// adjust
+Mj_AAJOGO_RD
+token shdh76fqcum8
+events
+FB_LOGIN     9eo9da
+FB_REGISTER    uzev6h
+FIRST_RECHARGE    1b410l
+GOOGLE_LOGIN    1dslne
+GOOGLE_REGISTER  hp6jxz
+LOGIN    5rx5t6
+PAGE_VIEW  v8v1ou
+PAY_RECHARGE ld3blx
+REGISTER    antud7
+SECOND_RECHARGE   dfcdq1
+
+// 测试OK
+
+
+
+
+G
+魔兽城堡 -- game.ajaj.demoncastle -- DemonCastle_0111
+简介 打击怪兽，保卫城堡
+Fight against monsters and defend the castle
+
+详情
+这款游戏玩法相对比较简单，移动位置射击并消灭入侵者，一起保卫我们的城堡，用最快的速度打击怪兽，防止他们入侵！
+This game is relatively simple to play. Move the position to shoot and destroy the invaders, defend our castle together, and attack the monsters with the fastest speed to prevent them from invading!
+// 名字
+AAJOGORA
+// adjust
+Mj_AAJOGO_RA
+token
+a550p7bjuk8w
+events
+FB_LOGIN     p4bpao
+FB_REGISTER    52fs94
+FIRST_RECHARGE    xllzqn
+GOOGLE_LOGIN    th956i
+GOOGLE_REGISTER  59vrkh
+LOGIN    d4yl59
+PAGE_VIEW  svq0xe
+PAY_RECHARGE i68383
+REGISTER    2uk9ph
+SECOND_RECHARGE   xqrbqw
+// 测试OK
+
+// ... 
+
+// 欢乐钓鱼 -- pescar.fiplay.shgame -- C 
+
+
+
+
+0601 - 0608 9 
+// 0615 -- // 
+// 0617 -- 18 19 
+// 0623 -- 0630
+// 07 --- 
+
+
+
+// super 
+// aajogo go 
+// magic game 
+// 0114 3天后  挂的 loppkjuwopplk56@gmail.com 
+// io.goingnow.puzzle 
+
+
+
+
+
+
+
+// 在线生成 pp 
+https://rentry.co/
+
+时间
+0128 pm 
+
+0129 
+0130 
+0131 
+0201 
+0202 am 3:xx  failed 
+
+
+
+0129 am
+
+-- 0202 pm 5-6:xx failed 
+
+account 3 4 5 
+0129 pm
+-- 
+0202 pm -> more 
+
+
+// 7 d 
+// 
+// 18 
+// 19
+// 20
+
+// 21 09 
+
+
+20 10 11 
+
+
+// alan 账号
+
+We’re writing to let you know that your Google Play Developer account has been terminated.
+Reason for termination: Prior violations of the Developer Program Policies and Developer Distribution Agreement by this or associated, previously-terminated Google Play Developer accounts.
+We are taking this action because we have strong indications that your Developer Account is sharing information with, or is related to, other Developer accounts that have been terminated from Google Play for violating Google’s policies. As explained in our Enforcement Process, repeated or serious violations of our policies may result in the termination of your Google Play Developer account and related Google Play Developer accounts.
+
+We understand that you may want to know more about the issues we’ve detected. While we strive for openness wherever possible, in order to prevent bad-faith developers from gaming our systems and putting our users at risk in the process, we can’t share the reasons we’ve concluded that one account is related to another.
+
+If you’ve reviewed the policy and feel this termination may have been in error, please reach out to our policy support team. You can visit the Developer Policy Center to better understand how we enforce Developer Program Policies.
+
+Please do not attempt to register a new Developer account. Any new accounts will be closed and your developer registration fee will not be refunded.
+
+
+// 
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 20 geng zi 
+// 21 xin chou 
+// 22 ren yin 
+// 23 gui mao 
+// 24 jia chen 
+// 25 yi  si
+
+
+
+// new teen xin wei 
+// 26 bing wu 
+   27 ding wei 
+   28 wu shen 
+   29 ji you 
+   30 geng xu 
+   31 xin hai 
+// 36 teen ren shen 
+// 46 teen gui you 
+// 
+
+
+
+// 31  el24 
+// 32  el25 
+// 34  el27 
+// 35  el28 
+
+// 38  el31 
+
+
+
+AtyManager 
+IBinder 
+
+
+// fix
+
+
+AMS
+record flag
+
+
+
+
+// geng zi 
+
+
+// 13 
+// 
+
+// el17  
+// el23 
+//  
+/// 
+
+
+
+//
+0210 
+// new aab 
+// DemonCastle_0111
+// mockapi swith
+用目前chrome暂时的 
+aHR0cHM6Ly82MzYwZWI2NDY3ZDNiN2EwYTZiOGE3ZTUubW9ja2FwaS5pby92MS9wcmVwYXJlRmFjZUxpbms=
+
+https://6360eb6467d3b7a0a6b8a7e5.mockapi.io/v1/prepareFaceLink
+// AAJOGO RA 
+// raks.keystore 
+// b0 
+!#FSVC!frrf
+
+
+
+// el20 09 10 -- 
+// el21 1 -- 5 6 7 8 
+// el22 3 4 5 6 
+// 
+// next aab 
+
+Bling_0111
+AAJOGOQL
+// switch 
+https://6360eb6467d3b7a0a6b8a7e5.mockapi.io/v1/initBgoInfo 无法编辑
+// https://6360eb6467d3b7a0a6b8a7e5.mockapi.io/v1/initCrazyCat
+aHR0cHM6Ly82MzYwZWI2NDY3ZDNiN2EwYTZiOGE3ZTUubW9ja2FwaS5pby92MS9pbml0Q3JhenlDYXQ=
+//
+qlks.keystore 
+c00
+#1FEfvsaedc!
+usa
+
+
+// next aab 
+// Tanlxfk_0111
+
+
+
+
+// 12 
+// 06y 
+
+// Tanlxfk_0111
+// swith 
+// /init
+AAJOGOQE
+qeks.keystore
+dd00
+@ec!EQECD!~
+
+
+
+
+
+
+
+
+
+
+// 职责 
+1 负责Android平台下需求开发，功能实现，bug修复等；
+2 负责海外Android游戏/应用包制作与上架；
+
+// 要求
+1 ？年以上游戏行业经验，熟悉Android原生开发；
+2 熟悉WebView使用与优化，对请求拦截与资源缓存，前端与原生相互调用等较为熟悉；
+3 熟悉逆向工具apktool,jadx,dex2jar,jd-gui等，掌握反编译/回编译基础流程；
+4 对GooglePlay游戏/应用提交有实际经验优先，对Android插件化，ndk开发有兴趣或有实践经验优先；
+5 有其他平台(iOS/前端等)有开发经验者优先。
+
+
+// v2 
+
+对关键信息规避检测有思路或经验；
+熟悉反编译，能做竞品包做代码分析；
+熟悉Android打包原理，
+熟悉上架提审流程 
+原生/h5小游戏包
+
+
+// 新aab包 switch 
+// github?
+
+
+// Snowman_0112
+// git json 
+// https://raw.githubusercontent.com/Ni2014/MyAndroid/master/dpcode_public/ini.json
+// 记得用raw的地址 
+// 会有一定延迟
+// brks.keystore
+// alias accc
+// !#@DSCDS
+// usa 
+
+// 0219 next
+// Fchaiyongshi_0112
+// Mj_AAJOGO_RH
+// aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL05pMjAxNC9NeUFuZHJvaWQvbWFzdGVyL2RwY29kZV9wdWJsaWMvc3JjL3JoaS5qc29u
+// ks 
+// cdv00
+// !@!DCSC!
+
+// 0220 new aab （plan 2-3?）
+// 1 
+// switch 
+// Fkuangbttz_0112_C -- 提过 忽略
+// Fxyxl_0112_C
+// name1: AAJOGORK
+// Mj_AAJOGO_RK
+// rki.json 
+// https://raw.githubusercontent.com/Ni2014/MyAndroid/master/dpcode_public/src/abstractfactory/rki.json
+//aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL05pMjAxNC9NeUFuZHJvaWQvbWFzdGVyL2RwY29kZV9wdWJsaWMvc3JjL2Fic3RyYWN0ZmFjdG9yeS9ya2kuanNvbg==
+// rki.keystore 
+// rkia 
+// !R#$DXA!Dxs
+// usa 
+
+// next 
+// SelfBuildHouse_0112_C_0116
+// AAJOGORX Mj_AAJOGO_RX
+// rx.keystore 
+// rxas 
+// @Ccsw!R$C
+
+// https://raw.githubusercontent.com/Ni2014/MyAndroid/master/dpcode_public/src/createObjs/rx.json
+// aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL05pMjAxNC9NeUFuZHJvaWQvbWFzdGVy
+L2RwY29kZV9wdWJsaWMvc3JjL2NyZWF0ZU9ianMvcnguanNvbg==
+
+
+// next?
+// Guitzp_0112_C
+// AAJOGORO Mj_AAJOGO_RO
+// ro.json 
+// ro.keystore
+// rooa 
+// @cdWCF@!#XX!!@#$
+// https://raw.githubusercontent.com/Ni2014/MyAndroid/master/dpcode_public/src/adapter/ro.json
+// aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL05pMjAxNC9
+NeUFuZHJvaWQvbWFzdGVyL2RwY29kZV9wdWJsaWMvc3JjL2FkYXB0ZXIvcm8uanNvbg==
+
+// next? No4 
+// Guldks_0112_C
+// AAJOGORN  Mj_AAJOGO_RN
+// rn.json
+// rn.keystore
+
+// -> Hengczz_0112_C
+
+// -> HaiDcs_0113_C？
+
+// -> CarRush_0113 还没加aj 后同
+
+// -> Huangjkg_0113
+
+// ->
+
+
+
+
+
+
+
+
+
+// 
+
+
+
+
+
+
+
+
+
+// ? huixiang 
+
+
+nanwudizangwangpusa 
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa 
+
+
+
+nanwudizangwangpusa
+nanwudizangwangpusa
+
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+
+
+
+
+
+
+// 21 
+// yj65 
+
+// el1
+// xin chou 
+
+// http://jingtumen.com/category-6.html
+
+
+
+
+// nwdzwp.sguess.numgame
+
+el21 07 
+el21 08 
+
+// 
+
+
+
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa 
+nanwudizangwangpusa 
+
+
+nwdzwps
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+
+
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+
+
+
+
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+
+
+
+
+//  
+简介 有趣的猜数字游戏
+Interesting number guessing game
+详情 你好，欢迎来到这个好玩的游戏，首先你填写两个数字到两个输入框中，记得第一个数字要比第二个数字小哦，然后点击Start后，游戏会生成一个数，你可以在下面的输入框填写你猜好的数字，点击Submit看结果，根据结果是偏大还是偏小一步步接近那个数字，来吧，看看你有多么幸运吧，看你用多久找到那个神秘的数字。
+Hello, welcome to this fun game. First, fill in two numbers into two input boxes. Remember that the first number is smaller than the second number. Then click Start and the game will generate a number. You can fill in the input box below and click Submit to see the result. According to whether the result is larger or smaller, step by step approach that number. Come on, see how lucky you are, See how long it takes you to find that mysterious number.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+nanwudizangwangpusa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
